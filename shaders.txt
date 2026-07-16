@@ -1,0 +1,62 @@
+// Vertex shader
+
+attribute position: vec3f;
+
+
+uniform u_World: mat4x4f;
+uniform u_ViewProjection: mat4x4f;
+uniform u_color: vec4f;
+uniform u_Float: f32;
+uniform u_Edge: f32;
+uniform u_color1: vec4f;
+uniform u_Float1: f32;
+
+
+
+
+@vertex
+fn main(input: VertexInputs) -> FragmentInputs{
+var output1: vec4f = uniforms.u_World * vec4f(vertexInputs.position, 1.0);
+var output0: vec4f = uniforms.u_ViewProjection * output1;
+vertexOutputs.position = output0;
+
+}
+
+// Fragment shader
+
+uniform u_World: mat4x4f;
+uniform u_ViewProjection: mat4x4f;
+uniform u_color: vec4f;
+uniform u_Float: f32;
+uniform u_Edge: f32;
+uniform u_color1: vec4f;
+uniform u_Float1: f32;
+
+
+#include<helperFunctions>
+
+
+
+@fragment
+fn main(input: FragmentInputs) -> FragmentOutputs {
+var output4: f32 = step(uniforms.u_Edge, uniforms.u_Float);
+var output3: vec4f = uniforms.u_color * output4;
+var output6: f32 = 1. - output4;
+var output5: vec4f = uniforms.u_color1 * output6;
+var output2: vec4f = output3 + output5;
+var fragmentOutputsColor : vec4<f32>;
+fragmentOutputsColor = vec4f(output2.rgb, uniforms.u_Float1);
+#ifdef CONVERTTOLINEAR0
+fragmentOutputsColor  = toLinearSpaceVec4(fragmentOutputsColor);
+#endif
+#ifdef CONVERTTOGAMMA0
+fragmentOutputsColor  = toGammaSpace(fragmentOutputsColor);
+#endif
+#if !defined(PREPASS)
+fragmentOutputs.color = fragmentOutputsColor;
+#endif
+#if defined(PREPASS)
+fragmentOutputs.fragData0 = fragmentOutputsColor;
+#endif
+
+}

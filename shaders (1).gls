@@ -1,0 +1,69 @@
+// Vertex shader
+#if defined(WEBGL2) || defined(WEBGPU)
+precision highp sampler2DArray;
+#endif
+precision highp float;
+
+attribute vec3 position;
+
+
+uniform mat4 u_World;
+uniform mat4 u_ViewProjection;
+uniform vec4 u_color;
+uniform float u_Float;
+uniform float u_Edge;
+uniform vec4 u_color1;
+uniform float u_Float1;
+
+
+
+
+void main(void) {
+vec4 output1 = u_World * vec4(position, 1.0);
+vec4 output0 = u_ViewProjection * output1;
+gl_Position = output0;
+
+}
+
+// Fragment shader
+#if defined(PREPASS)
+#extension GL_EXT_draw_buffers : require
+layout(location = 0) out highp vec4 glFragData[SCENE_MRT_COUNT];
+highp vec4 gl_FragColor;
+#endif
+#if defined(WEBGL2) || defined(WEBGPU)
+precision highp sampler2DArray;
+#endif
+precision highp float;
+
+uniform mat4 u_World;
+uniform mat4 u_ViewProjection;
+uniform vec4 u_color;
+uniform float u_Float;
+uniform float u_Edge;
+uniform vec4 u_color1;
+uniform float u_Float1;
+
+
+#include<helperFunctions>
+
+
+
+void main(void) {
+float output4 = step(u_Edge, u_Float);
+vec4 output3 = u_color * output4;
+float output6 = 1. - output4;
+vec4 output5 = u_color1 * output6;
+vec4 output2 = output3 + output5;
+gl_FragColor = vec4(output2.rgb, u_Float1);
+#ifdef CONVERTTOLINEAR0
+gl_FragColor  = toLinearSpace(gl_FragColor);
+#endif
+#ifdef CONVERTTOGAMMA0
+gl_FragColor  = toGammaSpace(gl_FragColor);
+#endif
+#if defined(PREPASS)
+gl_FragData[0] = gl_FragColor;
+#endif
+
+}

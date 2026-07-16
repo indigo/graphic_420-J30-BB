@@ -1,0 +1,162 @@
+var nodeMaterial = new BABYLON.NodeMaterial("node");
+nodeMaterial.mode = BABYLON.NodeMaterialModes.Material;
+
+// InputBlock
+var position = new BABYLON.InputBlock("position");
+position.visibleInInspector = false;
+position.visibleOnFrame = false;
+position.target = 1;
+position.setAsAttribute("position");
+
+// TransformBlock
+var WorldPos = new BABYLON.TransformBlock("WorldPos");
+WorldPos.visibleInInspector = false;
+WorldPos.visibleOnFrame = false;
+WorldPos.target = 1;
+WorldPos.complementZ = 0;
+WorldPos.complementW = 1;
+
+// InputBlock
+var World = new BABYLON.InputBlock("World");
+World.visibleInInspector = false;
+World.visibleOnFrame = false;
+World.target = 1;
+World.setAsSystemValue(BABYLON.NodeMaterialSystemValues.World);
+
+// TransformBlock
+var WorldPosViewProjectionTransform = new BABYLON.TransformBlock("WorldPos * ViewProjectionTransform");
+WorldPosViewProjectionTransform.visibleInInspector = false;
+WorldPosViewProjectionTransform.visibleOnFrame = false;
+WorldPosViewProjectionTransform.target = 1;
+WorldPosViewProjectionTransform.complementZ = 0;
+WorldPosViewProjectionTransform.complementW = 1;
+
+// InputBlock
+var ViewProjection = new BABYLON.InputBlock("ViewProjection");
+ViewProjection.visibleInInspector = false;
+ViewProjection.visibleOnFrame = false;
+ViewProjection.target = 1;
+ViewProjection.setAsSystemValue(BABYLON.NodeMaterialSystemValues.ViewProjection);
+
+// VertexOutputBlock
+var VertexOutput = new BABYLON.VertexOutputBlock("VertexOutput");
+VertexOutput.visibleInInspector = false;
+VertexOutput.visibleOnFrame = false;
+VertexOutput.target = 1;
+
+// InputBlock
+var color = new BABYLON.InputBlock("color");
+color.visibleInInspector = false;
+color.visibleOnFrame = false;
+color.target = 1;
+color.value = new BABYLON.Color4(1, 0, 0, 1);
+color.isConstant = false;
+
+// MultiplyBlock
+var Multiply = new BABYLON.MultiplyBlock("Multiply");
+Multiply.visibleInInspector = false;
+Multiply.visibleOnFrame = false;
+Multiply.target = 4;
+
+// StepBlock
+var Step = new BABYLON.StepBlock("Step");
+Step.visibleInInspector = false;
+Step.visibleOnFrame = false;
+Step.target = 4;
+
+// InputBlock
+var Float = new BABYLON.InputBlock("Float");
+Float.visibleInInspector = false;
+Float.visibleOnFrame = false;
+Float.target = 1;
+Float.value = 0.29;
+Float.min = 0;
+Float.max = 1;
+Float.isBoolean = false;
+Float.matrixMode = 0;
+Float.animationType = BABYLON.AnimatedInputBlockTypes.None;
+Float.isConstant = false;
+
+// InputBlock
+var Edge = new BABYLON.InputBlock("Edge");
+Edge.visibleInInspector = false;
+Edge.visibleOnFrame = false;
+Edge.target = 1;
+Edge.value = 0.5;
+Edge.min = 0;
+Edge.max = 0;
+Edge.isBoolean = false;
+Edge.matrixMode = 0;
+Edge.animationType = BABYLON.AnimatedInputBlockTypes.None;
+Edge.isConstant = false;
+
+// OneMinusBlock
+var Oneminus = new BABYLON.OneMinusBlock("One minus");
+Oneminus.visibleInInspector = false;
+Oneminus.visibleOnFrame = false;
+Oneminus.target = 4;
+
+// MultiplyBlock
+var Multiply1 = new BABYLON.MultiplyBlock("Multiply");
+Multiply1.visibleInInspector = false;
+Multiply1.visibleOnFrame = false;
+Multiply1.target = 4;
+
+// InputBlock
+var color1 = new BABYLON.InputBlock("color");
+color1.visibleInInspector = false;
+color1.visibleOnFrame = false;
+color1.target = 1;
+color1.value = new BABYLON.Color4(0, 0.6862745098039216, 1, 1);
+color1.isConstant = false;
+
+// AddBlock
+var Add = new BABYLON.AddBlock("Add");
+Add.visibleInInspector = false;
+Add.visibleOnFrame = false;
+Add.target = 4;
+
+// FragmentOutputBlock
+var FragmentOutput = new BABYLON.FragmentOutputBlock("FragmentOutput");
+FragmentOutput.visibleInInspector = false;
+FragmentOutput.visibleOnFrame = false;
+FragmentOutput.target = 2;
+FragmentOutput.convertToGammaSpace = false;
+FragmentOutput.convertToLinearSpace = false;
+FragmentOutput.useLogarithmicDepth = false;
+
+// InputBlock
+var Float1 = new BABYLON.InputBlock("Float");
+Float1.visibleInInspector = false;
+Float1.visibleOnFrame = false;
+Float1.target = 1;
+Float1.value = 1;
+Float1.min = 0;
+Float1.max = 0;
+Float1.isBoolean = false;
+Float1.matrixMode = 0;
+Float1.animationType = BABYLON.AnimatedInputBlockTypes.None;
+Float1.isConstant = false;
+
+// Connections
+position.output.connectTo(WorldPos.vector);
+World.output.connectTo(WorldPos.transform);
+WorldPos.output.connectTo(WorldPosViewProjectionTransform.vector);
+ViewProjection.output.connectTo(WorldPosViewProjectionTransform.transform);
+WorldPosViewProjectionTransform.output.connectTo(VertexOutput.vector);
+color.output.connectTo(Multiply.left);
+Float.output.connectTo(Step.value);
+Edge.output.connectTo(Step.edge);
+Step.output.connectTo(Multiply.right);
+Multiply.output.connectTo(Add.left);
+color1.output.connectTo(Multiply1.left);
+Step.output.connectTo(Oneminus.input);
+Oneminus.output.connectTo(Multiply1.right);
+Multiply1.output.connectTo(Add.right);
+Add.output.connectTo(FragmentOutput.rgba);
+Float1.output.connectTo(FragmentOutput.a);
+
+// Output nodes
+nodeMaterial.addOutputNode(VertexOutput);
+nodeMaterial.addOutputNode(FragmentOutput);
+nodeMaterial.build();
