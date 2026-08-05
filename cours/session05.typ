@@ -253,7 +253,7 @@
   La loi de Lambert explique les surfaces *mates* (bois, papier, béton). Mais une bille de verre, une voiture peinte ou un métal poli réfléchissent aussi la lumière comme un miroir — c'est la composante *spéculaire*. Elle ne dépend pas seulement de l'angle $arrow(N) dot arrow(L)$, mais aussi de la position de la *caméra* : le reflet se déplace quand on tourne autour de l'objet.
 ]
 
-#definition-box(title: "Le reflet : $arrow(R) dot arrow(V)$")[
+#definition-box(title: [Le reflet : $arrow(R) dot arrow(V)$])[
   La composante spéculaire simule le reflet brillant d'une lumière sur une surface lisse. Elle dépend de trois vecteurs :
 
   - $arrow(L)$ : Direction de la surface vers la lumière.
@@ -267,7 +267,7 @@
   - Valeur élevée (ex: 128) : reflet petit et net (métal poli).
 ]
 
-#definition-box(title: "Le vecteur réfléchi $arrow(R)$")[
+#definition-box(title: [Le vecteur réfléchi $arrow(R)$])[
   Le rayon réfléchi se calcule par la formule :
   $ arrow(R) = 2 (arrow(N) dot arrow(L)) arrow(N) - arrow(L) $
 
@@ -283,7 +283,7 @@
 
 #heading(level: 3)[9. Blinn-Phong : la variante optimisée]
 
-#definition-box(title: "Le vecteur half-angle $arrow(H)$")[
+#definition-box(title: [Le vecteur half-angle $arrow(H)$])[
   Le modèle Blinn-Phong remplace le vecteur réfléchi $arrow(R)$ par le vecteur *half-angle* $arrow(H)$ :
   $ arrow(H) = "normalize"(arrow(L) + arrow(V)) $
 
@@ -347,7 +347,7 @@
   ```
 ]
 
-#important-box(title: "Pourquoi `step()` plutôt qu'un `if` ?")[
+#important-box(title: [Pourquoi `step()` plutôt qu'un `if` ?])[
   Sans masque, la spéculaire apparaîtrait sur la face *non éclairée* — un reflet fantôme. Mais un `if (diffuse <= 0.0)` est un *branchement sur une valeur varying* : comme `diffuse` diffère d'un fragment à l'autre, les threads d'un même warp divergent et s'exécutent en série, ce qui annule l'avantage du SIMD.
 
   La fonction `step(edge, x)` retourne `0` si $x < "edge"$, `1` sinon — c'est une opération *mathématique pure*, exécutée en lockstep par tous les threads. Multiplier la spéculaire par `step(0.0, NdotL)` coupe donc le reflet sur les faces sombres *sans aucune divergence*. C'est l'idiome standard en GLSL pour tout masque conditionnel.

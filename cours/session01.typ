@@ -54,7 +54,7 @@
 
 #heading(level: 2)[Rappels mathématiques : Vecteurs et Matrices]
 
-#definition-box(title: "Vecteurs (`Vector3`)")[
+#definition-box(title: [Vecteurs (`Vector3`)])[
   Un vecteur représente une direction et une magnitude dans l'espace 3D. Dans Babylon.js, on utilise la classe `BABYLON.Vector3`.
 
   *Opérations essentielles :*
@@ -75,7 +75,7 @@
   - *Produit vectoriel* : Produit un vecteur perpendiculaire aux deux autres. Utilisé pour calculer les normales de surface.
 ]
 
-#definition-box(title: "Matrices (`Matrix`)")[
+#definition-box(title: [Matrices (`Matrix`)])[
   Une matrice 4x4 représente une *transformation* dans l'espace (translation, rotation, scale, ou combinaison). Babylon.js utilise `BABYLON.Matrix`.
 
   *Transformations courantes :*
