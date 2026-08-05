@@ -1,0 +1,85 @@
+<svg width="600" height="420" viewBox="0 0 600 420" fill="none" xmlns="http://www.w3.org/2000/svg" font-family="Georgia, serif">
+  <defs>
+    <radialGradient id="sphereGrad" cx="35%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="35%" stop-color="#d8d8d8"/>
+      <stop offset="70%" stop-color="#555555"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </radialGradient>
+    <marker id="arrN2" markerWidth="8" markerHeight="8" refX="6" refY="2.5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L6,2.5 L0,5 Z" fill="#2c6fb0"/>
+    </marker>
+    <marker id="arrL2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#c0392b"/>
+    </marker>
+  </defs>
+
+  <rect width="600" height="420" fill="#ffffff"/>
+
+  <!-- Lumiere (soleil) a gauche -->
+  <circle cx="60" cy="180" r="28" fill="#FFD000"/>
+  <g stroke="#FFD000" stroke-width="2" stroke-linecap="round">
+    <line x1="60" y1="135" x2="60" y2="120"/>
+    <line x1="60" y1="225" x2="60" y2="240"/>
+    <line x1="15" y1="180" x2="0" y2="180"/>
+    <line x1="105" y1="180" x2="120" y2="180"/>
+    <line x1="28" y1="148" x2="18" y2="138"/>
+    <line x1="92" y1="212" x2="102" y2="222"/>
+    <line x1="28" y1="212" x2="18" y2="222"/>
+    <line x1="92" y1="148" x2="102" y2="138"/>
+  </g>
+  <text x="60" y="245" text-anchor="middle" font-size="14" fill="#7a6a00" font-weight="bold">Lumière</text>
+
+  <!-- Rayons lumineux paralleles vers la sphere -->
+  <g stroke="#FFD000" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.7">
+    <line x1="90" y1="160" x2="240" y2="190"/>
+    <line x1="90" y1="180" x2="240" y2="210"/>
+    <line x1="90" y1="200" x2="240" y2="230"/>
+  </g>
+
+  <!-- Sphere avec gradient (Lambert) -->
+  <circle cx="320" cy="210" r="120" fill="url(#sphereGrad)" stroke="#222" stroke-width="1.5"/>
+
+  <!-- Normales radiales en plusieurs points -->
+  <g stroke="#2c6fb0" stroke-width="1.8" fill="none" opacity="0.85">
+    <!-- centre (point le plus eclaire) -->
+    <line x1="320" y1="210" x2="320" y2="160" marker-end="url(#arrN2)"/>
+    <!-- haut-gauche -->
+    <line x1="252" y1="158" x2="222" y2="128" marker-end="url(#arrN2)"/>
+    <!-- haut-droit -->
+    <line x1="388" y1="158" x2="418" y2="128" marker-end="url(#arrN2)"/>
+    <!-- gauche (terminateur) -->
+    <line x1="200" y1="210" x2="160" y2="210" marker-end="url(#arrN2)"/>
+    <!-- droit (cote sombre) -->
+    <line x1="440" y1="210" x2="480" y2="210" marker-end="url(#arrN2)"/>
+    <!-- bas-gauche -->
+    <line x1="252" y1="262" x2="222" y2="292" marker-end="url(#arrN2)"/>
+    <!-- bas-droit -->
+    <line x1="388" y1="262" x2="418" y2="292" marker-end="url(#arrN2)"/>
+  </g>
+
+  <!-- L au point central (aligne avec N) -->
+  <line x1="320" y1="160" x2="320" y2="210" stroke="#c0392b" stroke-width="2" marker-end="url(#arrL2)"/>
+  <text x="332" y="180" font-size="15" fill="#c0392b" font-style="italic">L</text>
+  <text x="328" y="155" font-size="15" fill="#2c6fb0" font-style="italic">N</text>
+  <text x="335" y="200" font-size="13" fill="#1e7d3a" font-weight="bold">N·L = 1</text>
+
+  <!-- L au terminateur (perpendiculaire) -->
+  <line x1="100" y1="210" x2="195" y2="210" stroke="#c0392b" stroke-width="2" marker-end="url(#arrL2)"/>
+  <text x="130" y="200" font-size="15" fill="#c0392b" font-style="italic">L</text>
+  <text x="160" y="225" font-size="13" fill="#7d3c1e" font-weight="bold">N·L = 0</text>
+
+  <!-- Annotations -->
+  <text x="320" y="135" text-anchor="middle" font-size="13" fill="#1e7d3a" font-weight="bold">tache claire</text>
+  <text x="475" y="245" font-size="13" fill="#7d3c1e" font-weight="bold">côté sombre</text>
+  <text x="160" y="245" font-size="13" fill="#7d3c1e" font-weight="bold">terminateur</text>
+
+  <!-- Legende -->
+  <g transform="translate(40,360)">
+    <line x1="0" y1="0" x2="30" y2="0" stroke="#2c6fb0" stroke-width="2" marker-end="url(#arrN2)"/>
+    <text x="40" y="5" font-size="14" fill="#2c6fb0">N (normale)</text>
+    <line x1="180" y1="0" x2="210" y2="0" stroke="#c0392b" stroke-width="2" marker-end="url(#arrL2)"/>
+    <text x="220" y="5" font-size="14" fill="#c0392b">L (direction lumière)</text>
+  </g>
+  <text x="300" y="405" text-anchor="middle" font-size="13" fill="#555" font-style="italic">Le dégradé sur la sphère vient de la variation de N·L : chaque fragment a une normale différente.</text>
+</svg>
