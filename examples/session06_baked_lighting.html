@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 06 — Baked Lighting en Three.js</title>
+    <style>
+      body { margin: 0; overflow: hidden; }
+      #info {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        color: white;
+        font-family: monospace;
+        font-size: 14px;
+        background: rgba(0,0,0,0.6);
+        padding: 10px 15px;
+        border-radius: 8px;
+        pointer-events: none;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.185.1/build/three.module.js",
+          "jsm/": "https://unpkg.com/three@0.185.1/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="info">Session 06 — Baked Lighting</div>
+    <script type="module" src="session06_baked_lighting.js"></script>
+  </body>
+</html>
