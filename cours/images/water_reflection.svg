@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 300" font-family="sans-serif" font-size="12">
+  <defs>
+    <marker id="arrW" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#333"/>
+    </marker>
+    <linearGradient id="waterGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a4a6a"/>
+      <stop offset="100%" stop-color="#050a10"/>
+    </linearGradient>
+    <radialGradient id="skyG" cx="50%" cy="0%" r="80%">
+      <stop offset="0%" stop-color="#87ceeb"/>
+      <stop offset="100%" stop-color="#4a8abf"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Sky background -->
+  <rect x="0" y="0" width="560" height="150" fill="url(#skyG)"/>
+
+  <!-- Objects above water -->
+  <g transform="translate(280, 0)">
+    <!-- Red cube -->
+    <rect x="-60" y="40" width="30" height="30" fill="#e74c3c" stroke="#a02020"/>
+    <!-- Green sphere -->
+    <circle cx="0" cy="55" r="15" fill="#2ecc71" stroke="#1a8c4a"/>
+    <!-- Yellow torus -->
+    <ellipse cx="50" cy="55" rx="18" ry="8" fill="none" stroke="#f1c40f" stroke-width="5"/>
+    <!-- Pillar -->
+    <rect x="80" y="20" width="12" height="50" fill="#9b59b6" stroke="#6a3a7a"/>
+  </g>
+
+  <!-- Water surface -->
+  <rect x="0" y="150" width="560" height="150" fill="url(#waterGrad)"/>
+
+  <!-- Wave lines on water -->
+  <path d="M 0,165 Q 40,160 80,165 T 160,165 T 240,165 T 320,165 T 400,165 T 480,165 T 560,165"
+        fill="none" stroke="#3a6a8a" stroke-width="1" opacity="0.5"/>
+  <path d="M 0,180 Q 50,175 100,180 T 200,180 T 300,180 T 400,180 T 500,180 T 560,180"
+        fill="none" stroke="#3a6a8a" stroke-width="1" opacity="0.4"/>
+
+  <!-- Reflections (mirrored, darker) -->
+  <g transform="translate(280, 150) scale(1, -1)" opacity="0.35">
+    <rect x="-60" y="40" width="30" height="30" fill="#e74c3c"/>
+    <circle cx="0" cy="55" r="15" fill="#2ecc71"/>
+    <ellipse cx="50" cy="55" rx="18" ry="8" fill="none" stroke="#f1c40f" stroke-width="5"/>
+    <rect x="80" y="20" width="12" height="50" fill="#9b59b6"/>
+  </g>
+
+  <!-- Distortion arrows on reflection -->
+  <g stroke="#c40" stroke-width="1.5" fill="none" opacity="0.6">
+    <path d="M 220,200 q 5,-3 10,0" marker-end="url(#arrW)"/>
+    <path d="M 300,210 q -5,-3 -10,0" marker-end="url(#arrW)"/>
+    <path d="M 350,195 q 5,-3 10,0" marker-end="url(#arrW)"/>
+  </g>
+
+  <!-- Labels -->
+  <text x="280" y="20" text-anchor="middle" font-weight="bold" fill="#fff">Scène (passe 1 → render target)</text>
+  <text x="280" y="145" text-anchor="middle" font-weight="bold" fill="#fff" font-size="11">Plan d'eau Y=0</text>
+  <text x="280" y="270" text-anchor="middle" font-weight="bold" fill="#fff">Réflexion déformée par 2 vagues (passe 2)</text>
+
+  <!-- Wave texture indicator -->
+  <g transform="translate(20, 220)">
+    <text x="0" y="0" fill="#fff" font-size="10">Vague 1 →</text>
+    <text x="0" y="15" fill="#fff" font-size="10">Vague 2 ←</text>
+    <text x="0" y="35" fill="#c40" font-size="10">Σ = interférence</text>
+  </g>
+
+  <!-- Camera -->
+  <g transform="translate(490, 80)">
+    <circle cx="0" cy="0" r="8" fill="#333" stroke="#fff" stroke-width="1.5"/>
+    <text x="0" y="-15" text-anchor="middle" fill="#fff" font-size="10">caméra</text>
+    <line x1="-5" y1="5" x2="-30" y2="60" stroke="#333" stroke-width="1.5" marker-end="url(#arrW)"/>
+  </g>
+
+  <!-- Reflection camera (mirrored) -->
+  <g transform="translate(490, 220) scale(1, -1)">
+    <circle cx="0" cy="0" r="8" fill="#c40" stroke="#fff" stroke-width="1.5"/>
+    <text x="0" y="-15" text-anchor="middle" fill="#c40" font-size="10" transform="scale(1,-1) translate(0, -30)">caméra réflexion</text>
+  </g>
+</svg>

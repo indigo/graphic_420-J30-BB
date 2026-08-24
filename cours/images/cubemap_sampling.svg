@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 320" font-family="sans-serif" font-size="12">
+  <defs>
+    <marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#333"/>
+    </marker>
+    <radialGradient id="skyGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6bb6ff"/>
+      <stop offset="100%" stop-color="#1a4a8a"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Unfolded cube map (cross layout) -->
+  <g transform="translate(20, 20)">
+    <!-- Top -->
+    <rect x="60" y="0" width="60" height="60" fill="#3a7bc8" stroke="#fff" stroke-width="1.5"/>
+    <text x="90" y="35" text-anchor="middle" fill="#fff" font-size="10">+Y</text>
+    <!-- Middle row: -X, +Z, +X, -Z -->
+    <rect x="0"  y="60" width="60" height="60" fill="#2a6099" stroke="#fff" stroke-width="1.5"/>
+    <text x="30" y="95" text-anchor="middle" fill="#fff" font-size="10">-X</text>
+    <rect x="60" y="60" width="60" height="60" fill="url(#skyGrad)" stroke="#fff" stroke-width="1.5"/>
+    <text x="90" y="95" text-anchor="middle" fill="#fff" font-size="10">+Z</text>
+    <rect x="120" y="60" width="60" height="60" fill="#2a6099" stroke="#fff" stroke-width="1.5"/>
+    <text x="150" y="95" text-anchor="middle" fill="#fff" font-size="10">+X</text>
+    <rect x="180" y="60" width="60" height="60" fill="#1a4a8a" stroke="#fff" stroke-width="1.5"/>
+    <text x="210" y="95" text-anchor="middle" fill="#fff" font-size="10">-Z</text>
+    <!-- Bottom -->
+    <rect x="60" y="120" width="60" height="60" fill="#1a4a8a" stroke="#fff" stroke-width="1.5"/>
+    <text x="90" y="155" text-anchor="middle" fill="#fff" font-size="10">-Y</text>
+
+    <text x="120" y="205" text-anchor="middle" font-weight="bold" fill="#333">Cube map déplié (6 faces)</text>
+  </g>
+
+  <!-- 3D Cube with direction vector -->
+  <g transform="translate(320, 40)">
+    <!-- Cube -->
+    <polygon points="40,20 100,20 120,40 60,40" fill="#4a90d9" stroke="#2a6099" stroke-width="1.5"/>
+    <polygon points="40,20 40,80 60,100 60,40" fill="#2a6099" stroke="#1a4a8a" stroke-width="1.5"/>
+    <polygon points="60,40 120,40 120,100 60,100" fill="#3a7bc8" stroke="#2a6099" stroke-width="1.5"/>
+
+    <!-- Center point -->
+    <circle cx="70" cy="60" r="3" fill="#c40"/>
+
+    <!-- Direction vector r -->
+    <line x1="70" y1="60" x2="110" y2="30" stroke="#c40" stroke-width="2.5" marker-end="url(#arr2)"/>
+    <text x="115" y="25" fill="#c40" font-weight="bold">r</text>
+
+    <!-- Normal n -->
+    <line x1="70" y1="60" x2="70" y2="20" stroke="#0a0" stroke-width="2" marker-end="url(#arr2)"/>
+    <text x="75" y="20" fill="#0a0" font-weight="bold">n</text>
+
+    <!-- View v -->
+    <line x1="70" y1="60" x2="30" y2="80" stroke="#333" stroke-width="2" marker-end="url(#arr2)"/>
+    <text x="15" y="85" fill="#333" font-weight="bold">v</text>
+
+    <text x="80" y="140" text-anchor="middle" font-weight="bold" fill="#333">Échantillonnage</text>
+    <text x="80" y="155" text-anchor="middle" font-size="11" fill="#666">r = reflect(v, n)</text>
+    <text x="80" y="170" text-anchor="middle" font-size="11" fill="#666">→ face + couleur</text>
+  </g>
+
+  <text x="260" y="300" text-anchor="middle" font-size="12" fill="#c40" font-weight="bold">Cube map : 6 faces échantillonnées par direction 3D</text>
+</svg>

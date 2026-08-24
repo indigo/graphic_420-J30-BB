@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 240" font-family="sans-serif" font-size="12">
+  <!-- 4 octaves side by side showing increasing detail -->
+  <g transform="translate(20, 20)">
+    <!-- Octave 1: low frequency, high amplitude -->
+    <rect x="0" y="0" width="120" height="120" fill="#f5f5f5" stroke="#999"/>
+    <path d="M 0,60 Q 30,20 60,60 T 120,60" fill="none" stroke="#333" stroke-width="2.5"/>
+    <text x="60" y="140" text-anchor="middle" font-weight="bold">Octave 0</text>
+    <text x="60" y="155" text-anchor="middle" font-size="10" fill="#666">freq=1, amp=0.5</text>
+    <text x="60" y="170" text-anchor="middle" font-size="10" fill="#c40">forme globale</text>
+  </g>
+
+  <g transform="translate(160, 20)">
+    <rect x="0" y="0" width="120" height="120" fill="#f5f5f5" stroke="#999"/>
+    <path d="M 0,60 Q 15,30 30,60 T 60,60 T 90,60 T 120,60" fill="none" stroke="#333" stroke-width="1.8"/>
+    <text x="60" y="140" text-anchor="middle" font-weight="bold">Octave 1</text>
+    <text x="60" y="155" text-anchor="middle" font-size="10" fill="#666">freq=2, amp=0.25</text>
+    <text x="60" y="170" text-anchor="middle" font-size="10" fill="#c40">détail moyen</text>
+  </g>
+
+  <g transform="translate(300, 20)">
+    <rect x="0" y="0" width="120" height="120" fill="#f5f5f5" stroke="#999"/>
+    <path d="M 0,60 Q 7,45 15,60 T 30,60 T 45,60 T 60,60 T 75,60 T 90,60 T 105,60 T 120,60" fill="none" stroke="#333" stroke-width="1.2"/>
+    <text x="60" y="140" text-anchor="middle" font-weight="bold">Octave 2</text>
+    <text x="60" y="155" text-anchor="middle" font-size="10" fill="#666">freq=4, amp=0.125</text>
+    <text x="60" y="170" text-anchor="middle" font-size="10" fill="#c40">détail fin</text>
+  </g>
+
+  <g transform="translate(440, 20)">
+    <rect x="0" y="0" width="120" height="120" fill="#f5f5f5" stroke="#999"/>
+    <path d="M 0,60 L 5,55 L 10,62 L 15,58 L 20,61 L 25,57 L 30,63 L 35,59 L 40,61 L 45,56 L 50,62 L 55,58 L 60,60 L 65,57 L 70,63 L 75,59 L 80,61 L 85,56 L 90,62 L 95,58 L 100,60 L 105,57 L 110,63 L 115,59 L 120,61" fill="none" stroke="#333" stroke-width="0.8"/>
+    <text x="60" y="140" text-anchor="middle" font-weight="bold">Octave 3</text>
+    <text x="60" y="155" text-anchor="middle" font-size="10" fill="#666">freq=8, amp=0.0625</text>
+    <text x="60" y="170" text-anchor="middle" font-size="10" fill="#c40">micro-détail</text>
+  </g>
+
+  <!-- Sum -->
+  <text x="280" y="215" text-anchor="middle" font-size="14" fill="#c40" font-weight="bold">
+    Σ = FBM : détail à toutes les échelles
+  </text>
+</svg>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 08 — Miroir Eau (Render Target)</title>
+    <style>
+      body { margin: 0; }
+      #info {
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          color: #fff;
+          font-family: monospace;
+          font-size: 13px;
+          pointer-events: none;
+          text-shadow: 1px 1px 2px #000;
+          max-width: 380px;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.185.1/build/three.module.js",
+          "jsm/": "https://unpkg.com/three@0.185.1/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="info">
+      Miroir eau — Render Target + 2 textures de vague en sens inverse<br>
+      Passe 1 : scène reflétée → render target<br>
+      Passe 2 : surface d'eau avec distortion + réflexion
+    </div>
+    <script type="module" src="session08_water.js"></script>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 08 — Textures Procédurales</title>
+    <style>
+      body { margin: 0; }
+      #info {
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          color: #fff;
+          font-family: monospace;
+          font-size: 14px;
+          pointer-events: none;
+          text-shadow: 1px 1px 2px #000;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.185.1/build/three.module.js",
+          "jsm/": "https://unpkg.com/three@0.185.1/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="info">Textures procédurales — cliquez "Exporter PNG" pour sauver l'image</div>
+    <script type="module" src="session08_textures.js"></script>
+  </body>
+</html>

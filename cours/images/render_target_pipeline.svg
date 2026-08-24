@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 280" font-family="sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#333"/>
+    </marker>
+    <linearGradient id="rtGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4a90d9"/>
+      <stop offset="100%" stop-color="#2a6099"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Scene -->
+  <rect x="20" y="60" width="120" height="100" rx="6" fill="#f5f5f5" stroke="#999"/>
+  <text x="80" y="50" text-anchor="middle" font-weight="bold">Scène 3D</text>
+  <!-- little cube in scene -->
+  <polygon points="60,90 100,90 110,100 70,100" fill="#e8a060" stroke="#c08040"/>
+  <polygon points="60,90 60,130 70,140 70,100" fill="#c08040" stroke="#a06030"/>
+  <polygon points="70,100 110,100 110,140 70,140" fill="#d09050" stroke="#a06030"/>
+
+  <!-- Pass 1 arrow -->
+  <line x1="150" y1="110" x2="220" y2="110" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="185" y="100" text-anchor="middle" fill="#c40" font-weight="bold">Passe 1</text>
+
+  <!-- Render Target -->
+  <rect x="230" y="60" width="120" height="100" rx="6" fill="url(#rtGrad)" stroke="#2a6099"/>
+  <text x="290" y="50" text-anchor="middle" font-weight="bold">Render Target</text>
+  <text x="290" y="115" text-anchor="middle" fill="#fff" font-size="11">Texture</text>
+  <text x="290" y="130" text-anchor="middle" fill="#fff" font-size="11">1024×1024</text>
+
+  <!-- Pass 2 arrow -->
+  <line x1="360" y1="110" x2="430" y2="110" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="395" y="100" text-anchor="middle" fill="#c40" font-weight="bold">Passe 2</text>
+
+  <!-- Screen -->
+  <rect x="440" y="60" width="120" height="100" rx="6" fill="#f5f5f5" stroke="#999"/>
+  <text x="500" y="50" text-anchor="middle" font-weight="bold">Écran</text>
+  <!-- mirror using RT -->
+  <rect x="460" y="80" width="40" height="60" fill="url(#rtGrad)" opacity="0.7" stroke="#2a6099"/>
+  <text x="480" y="155" text-anchor="middle" font-size="10">miroir</text>
+  <rect x="510" y="80" width="40" height="60" fill="#ddd" stroke="#999"/>
+  <text x="530" y="155" text-anchor="middle" font-size="10">mur</text>
+
+  <!-- Bottom labels -->
+  <text x="80" y="200" text-anchor="middle" font-size="11" fill="#666">Rendu de la scène</text>
+  <text x="290" y="200" text-anchor="middle" font-size="11" fill="#666">Stockée en VRAM</text>
+  <text x="500" y="200" text-anchor="middle" font-size="11" fill="#666">Rendu final + sampling</text>
+
+  <text x="300" y="250" text-anchor="middle" font-size="12" fill="#c40" font-weight="bold">Pipeline en deux passes</text>
+</svg>

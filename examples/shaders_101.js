@@ -27,6 +27,15 @@ const params = {
 // Calcule la position clip-space et passe au fragment shader :
 //   - la normale en espace monde (vNormal)
 //   - la position du fragment en espace monde (vWorldPos)
+// Voila la liste des attributs et uniforms disponibles :
+// attribute vec3 position;       // local-space vertex position
+// attribute vec3 normal;         // local-space vertex normal
+// attribute vec2 uv;             // texture coordinates
+// uniform mat4 modelMatrix;      // local → world
+// uniform mat4 viewMatrix;       // world → view (camera)
+// uniform mat4 projectionMatrix; // view → clip space
+// ... et d'autres uniforms
+
 const vertexShader = /* glsl */ `
   varying vec3 vNormal;
   varying vec3 vWorldPos;
@@ -172,7 +181,12 @@ function createSphere() {
     });
 
     sphere = new THREE.Mesh(
-        new THREE.SphereGeometry(1.5, 64, 64),
+        // Generate the position passed to the vertex shader
+        // THREE.SphereGeometry builds a BufferGeometry 
+        // whose attributes.position is a Float32BufferAttribute 
+        // containing the XYZ coordinates of every vertex of the sphere 
+        // (relative to the geometry's local origin, i.e. object/local space).
+        new THREE.SphereGeometry(1.5, 64, 64), 
         material
     );
     scene.add(sphere);

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebGPU 103 — Tissu (Verlet + Compute)</title>
+    <style>
+      body { margin: 0; }
+      #info {
+        position: absolute; top: 8px; left: 12px;
+        font: 13px monospace; color: #ddd;
+        background: rgba(0,0,0,0.5); padding: 6px 10px;
+        border-radius: 4px; pointer-events: none;
+        white-space: pre-line;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.185.1/build/three.webgpu.js",
+          "three/webgpu": "https://unpkg.com/three@0.185.1/build/three.webgpu.js",
+          "three/tsl": "https://unpkg.com/three@0.185.1/build/three.tsl.js",
+          "jsm/": "https://unpkg.com/three@0.185.1/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="info">WebGPU 103 — Tissu (Verlet + Compute Shaders)</div>
+    <script type="module" src="webgpu_103.js"></script>
+  </body>
+</html>
