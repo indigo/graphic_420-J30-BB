@@ -730,7 +730,7 @@
   Dans le Shader Editor de Blender, utiliser un *Mix RGB* node en mode *Multiply* pour mélanger la base et le détail. Le *Fac* contrôle l'intensité du détail. Pour les normales, utiliser un *Normal Map* node avec la base, puis un *Mix* node en mode *Add* avec le détail normal.
 ]
 
-#heading(level: 2)[Partie 8 : TP — Au Choix]
+#heading(level: 2)[Partie 8 : Pratique]
 
 #tip-box(title: "Objectif pratique")[
 Mettre en place un tri-planar mapping avec une texture de détail.
