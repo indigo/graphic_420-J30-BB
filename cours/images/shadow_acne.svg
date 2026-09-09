@@ -1,0 +1,102 @@
+<svg width="920" height="380" viewBox="0 0 920 380" fill="none" xmlns="http://www.w3.org/2000/svg" font-family="Georgia, serif">
+  <defs>
+    <radialGradient id="lightGlow2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff4c2" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#f5a623" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="920" height="380" fill="#ffffff"/>
+
+  <!-- ===== Acne (sans bias) ===== -->
+  <g transform="translate(30,40)">
+    <text x="200" y="0" text-anchor="middle" font-size="15" font-weight="bold" fill="#c0392b">Sans bias — Shadow Acne</text>
+    <text x="200" y="18" text-anchor="middle" font-size="12" fill="#666">le triangle s'auto-ombre à cause de la précision</text>
+
+    <!-- surface (triangle vu de côté) -->
+    <line x1="40" y1="200" x2="360" y2="200" stroke="#374151" stroke-width="2.5"/>
+    <!-- normales -->
+    <g stroke="#2c8a4a" stroke-width="1.4">
+      <line x1="100" y1="200" x2="100" y2="170"/>
+      <line x1="180" y1="200" x2="180" y2="170"/>
+      <line x1="260" y1="200" x2="260" y2="170"/>
+    </g>
+    <text x="100" y="162" text-anchor="middle" font-size="10" fill="#2c8a4a">N</text>
+
+    <!-- lumière rasante -->
+    <circle cx="40" cy="60" r="20" fill="url(#lightGlow2)"/>
+    <circle cx="40" cy="60" r="8" fill="#fff4c2" stroke="#e0921a" stroke-width="1.4"/>
+    <g stroke="#f5a623" stroke-width="1.2" stroke-dasharray="3 3">
+      <line x1="48" y1="66" x2="120" y2="198"/>
+      <line x1="48" y1="66" x2="200" y2="198"/>
+      <line x1="48" y1="66" x2="280" y2="198"/>
+    </g>
+
+    <!-- taches d'acne (rayures sombres irrégulières sur la surface) -->
+    <g fill="#111" fill-opacity="0.6">
+      <rect x="120" y="198" width="14" height="4"/>
+      <rect x="150" y="198" width="8" height="4"/>
+      <rect x="200" y="198" width="18" height="4"/>
+      <rect x="240" y="198" width="10" height="4"/>
+      <rect x="280" y="198" width="22" height="4"/>
+      <rect x="320" y="198" width="12" height="4"/>
+    </g>
+
+    <!-- explication : imprécision de depth -->
+    <g transform="translate(40,250)">
+      <text x="0" y="0" font-size="11" fill="#222">La shadow map stocke une profondeur *quantifiée* (par texel).</text>
+      <text x="0" y="16" font-size="11" fill="#222">Sur une surface rasante, le fragment est parfois mesuré *légèrement</text>
+      <text x="0" y="32" font-size="11" fill="#222">plus loin* que la valeur stockée ⇒ le test échoue ⇒ ombre fantôme.</text>
+    </g>
+  </g>
+
+  <!-- ===== Avec bias ===== -->
+  <g transform="translate(490,40)">
+    <text x="200" y="0" text-anchor="middle" font-size="15" font-weight="bold" fill="#2c8a4a">Avec bias — Ombre propre</text>
+    <text x="200" y="18" text-anchor="middle" font-size="12" fill="#666">on décale le test pour tolérer l'imprécision</text>
+
+    <!-- surface -->
+    <line x1="40" y1="200" x2="360" y2="200" stroke="#374151" stroke-width="2.5"/>
+    <g stroke="#2c8a4a" stroke-width="1.4">
+      <line x1="100" y1="200" x2="100" y2="170"/>
+      <line x1="180" y1="200" x2="180" y2="170"/>
+      <line x1="260" y1="200" x2="260" y2="170"/>
+    </g>
+
+    <!-- lumière -->
+    <circle cx="40" cy="60" r="20" fill="url(#lightGlow2)"/>
+    <circle cx="40" cy="60" r="8" fill="#fff4c2" stroke="#e0921a" stroke-width="1.4"/>
+    <g stroke="#f5a623" stroke-width="1.2" stroke-dasharray="3 3">
+      <line x1="48" y1="66" x2="120" y2="198"/>
+      <line x1="48" y1="66" x2="200" y2="198"/>
+      <line x1="48" y1="66" x2="280" y2="198"/>
+    </g>
+
+    <!-- flèche de bias (décalage vers la lumière) -->
+    <g stroke="#c0392b" stroke-width="1.6" marker-end="url(#arrBias)">
+      <line x1="200" y1="200" x2="200" y2="186"/>
+    </g>
+    <text x="212" y="194" font-size="11" fill="#c0392b" font-style="italic">bias</text>
+
+    <!-- pas d'acne : surface uniforme -->
+    <text x="200" y="225" text-anchor="middle" font-size="11" fill="#2c8a4a" font-weight="bold">surface nette, aucune rayure</text>
+
+    <g transform="translate(0,250)">
+      <text x="0" y="0" font-size="11" fill="#222">Le *depth bias* soustrait une petite valeur à la profondeur du</text>
+      <text x="0" y="16" font-size="11" fill="#222">fragment avant la comparaison. Trop petit ⇒ acne. Trop grand ⇒</text>
+      <text x="0" y="32" font-size="11" fill="#222">*peter panning* (l'ombre se détache du contact, voir ci-dessous).</text>
+    </g>
+  </g>
+
+  <defs>
+    <marker id="arrBias" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#c0392b"/>
+    </marker>
+  </defs>
+
+  <!-- ===== Peter pan ===== -->
+  <g transform="translate(30,330)">
+  </g>
+
+  <text x="460" y="370" text-anchor="middle" font-size="13" fill="#555" font-style="italic">Le shadow acne : des rayures sombres apparaissent sur les surfaces éclairées en biais. Le bias corrige ce défaut mais peut créer le peter panning.</text>
+</svg>

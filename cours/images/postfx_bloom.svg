@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arr2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#6080a0"/>
+    </marker>
+  </defs>
+
+  <!-- Original image -->
+  <rect x="20" y="60" width="160" height="120" rx="6" fill="#1a1a2e" stroke="#40a0ff" stroke-width="2"/>
+  <!-- Bright spots -->
+  <circle cx="80" cy="100" r="15" fill="#ffffe0" opacity="0.9"/>
+  <circle cx="130" cy="140" r="10" fill="#ffffe0" opacity="0.7"/>
+  <text x="100" y="50" text-anchor="middle" fill="#60c0ff" font-size="12" font-weight="bold">Image scène (HDR)</text>
+  <text x="100" y="200" text-anchor="middle" fill="#8090a0" font-size="10">Couleurs > 1.0 possibles</text>
+
+  <!-- Arrow -->
+  <line x1="185" y1="120" x2="225" y2="120" stroke="#6080a0" stroke-width="2" marker-end="url(#arr2)"/>
+  <text x="205" y="110" text-anchor="middle" fill="#e0e050" font-size="10">seuil > 1.0</text>
+
+  <!-- Bright pass -->
+  <rect x="230" y="60" width="160" height="120" rx="6" fill="#0a0a14" stroke="#e0e050" stroke-width="2"/>
+  <circle cx="290" cy="100" r="15" fill="#ffffe0" opacity="0.9"/>
+  <circle cx="340" cy="140" r="10" fill="#ffffe0" opacity="0.7"/>
+  <text x="310" y="50" text-anchor="middle" fill="#e0e050" font-size="12" font-weight="bold">Bright pass</text>
+  <text x="310" y="200" text-anchor="middle" fill="#8090a0" font-size="10">Seuillage : garde les pixels lumineux</text>
+
+  <!-- Arrow -->
+  <line x1="395" y1="120" x2="435" y2="120" stroke="#6080a0" stroke-width="2" marker-end="url(#arr2)"/>
+  <text x="415" y="110" text-anchor="middle" fill="#50e050" font-size="10">gaussian blur</text>
+
+  <!-- Blurred -->
+  <rect x="440" y="60" width="160" height="120" rx="6" fill="#0a0a14" stroke="#50e050" stroke-width="2"/>
+  <circle cx="500" cy="100" r="35" fill="#ffffe0" opacity="0.3"/>
+  <circle cx="550" cy="140" r="25" fill="#ffffe0" opacity="0.25"/>
+  <text x="520" y="50" text-anchor="middle" fill="#50e050" font-size="12" font-weight="bold">Halo flou</text>
+  <text x="520" y="200" text-anchor="middle" fill="#8090a0" font-size="10">Gaussian blur (plusieurs passes)</text>
+
+  <!-- Arrow -->
+  <line x1="605" y1="120" x2="645" y2="120" stroke="#6080a0" stroke-width="2" marker-end="url(#arr2)"/>
+  <text x="625" y="110" text-anchor="middle" fill="#e05050" font-size="10">addition</text>
+
+  <!-- Final -->
+  <rect x="650" y="60" width="130" height="120" rx="6" fill="#1a1a2e" stroke="#e05050" stroke-width="2"/>
+  <circle cx="710" cy="100" r="35" fill="#ffffe0" opacity="0.3"/>
+  <circle cx="710" cy="100" r="15" fill="#ffffe0" opacity="0.9"/>
+  <circle cx="750" cy="140" r="25" fill="#ffffe0" opacity="0.2"/>
+  <circle cx="750" cy="140" r="10" fill="#ffffe0" opacity="0.7"/>
+  <text x="715" y="50" text-anchor="middle" fill="#e05050" font-size="12" font-weight="bold">Résultat</text>
+  <text x="715" y="200" text-anchor="middle" fill="#8090a0" font-size="10">Scène + halo = bloom</text>
+
+  <!-- Formula at bottom -->
+  <text x="400" y="250" text-anchor="middle" fill="#6080a0" font-size="12" font-style="italic">finale = scène + bright_pass → blur</text>
+</svg>

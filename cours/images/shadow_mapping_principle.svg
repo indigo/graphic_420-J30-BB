@@ -1,0 +1,128 @@
+<svg width="940" height="420" viewBox="0 0 940 420" fill="none" xmlns="http://www.w3.org/2000/svg" font-family="Georgia, serif">
+  <defs>
+    <marker id="arrL" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#c0392b"/>
+    </marker>
+    <marker id="arrC" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#2c6fb0"/>
+    </marker>
+    <radialGradient id="lightGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff4c2" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#f5a623" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="940" height="420" fill="#ffffff"/>
+
+  <!-- ===== Passe 1 : rendu depuis la lumière ===== -->
+  <g transform="translate(20,30)">
+    <text x="220" y="0" text-anchor="middle" font-size="15" font-weight="bold" fill="#222">Passe 1 — Rendu depuis la lumière</text>
+    <text x="220" y="18" text-anchor="middle" font-size="12" fill="#666">on ne garde que la profondeur (shadow map)</text>
+
+    <!-- cadre de la shadow map (ce que "voit" la lumière) -->
+    <rect x="40" y="40" width="360" height="220" fill="#f7f7f4" stroke="#888" stroke-width="1.2" stroke-dasharray="5 4"/>
+    <text x="50" y="56" font-size="11" fill="#888" font-style="italic">frustum de la lumière</text>
+
+    <!-- lumière -->
+    <circle cx="80" cy="80" r="22" fill="url(#lightGlow)"/>
+    <circle cx="80" cy="80" r="9" fill="#fff4c2" stroke="#e0921a" stroke-width="1.5"/>
+    <text x="80" y="120" text-anchor="middle" font-size="11" fill="#7a5300">lumière</text>
+
+    <!-- objet A (au premier plan, proche de la lumière) -->
+    <rect x="180" y="120" width="50" height="70" fill="#6b7280" stroke="#374151" stroke-width="1.5"/>
+    <text x="205" y="205" text-anchor="middle" font-size="10" fill="#374151">objet A</text>
+    <!-- objet B (derrière, plus loin) -->
+    <rect x="300" y="140" width="60" height="50" fill="#9ca3af" stroke="#4b5563" stroke-width="1.5"/>
+    <text x="330" y="205" text-anchor="middle" font-size="10" fill="#4b5563">objet B</text>
+
+    <!-- rayons de la lumière vers les objets -->
+    <g stroke="#f5a623" stroke-width="1.4" stroke-dasharray="4 3">
+      <line x1="89" y1="86" x2="180" y2="125"/>
+      <line x1="89" y1="86" x2="300" y2="145"/>
+    </g>
+
+    <!-- indication profondeur -->
+    <text x="220" y="245" text-anchor="middle" font-size="11" fill="#2c6fb0">depth(A) = 0.42   depth(B) = 0.71</text>
+    <text x="220" y="262" text-anchor="middle" font-size="11" fill="#2c6fb0">→ écrit dans la shadow map</text>
+
+    <!-- mini shadow map texture -->
+    <g transform="translate(420,90)">
+      <text x="40" y="-10" text-anchor="middle" font-size="11" fill="#222" font-weight="bold">Shadow Map</text>
+      <rect x="0" y="0" width="80" height="80" fill="#000" stroke="#444" stroke-width="1.2"/>
+      <!-- pixels de profondeur (gris selon distance) -->
+      <rect x="0" y="0" width="80" height="80" fill="#1a1a1a"/>
+      <rect x="22" y="22" width="20" height="28" fill="#6b6b6b"/>
+      <rect x="48" y="32" width="24" height="20" fill="#a8a8a8"/>
+      <text x="40" y="98" text-anchor="middle" font-size="10" fill="#555">texture de profondeur</text>
+      <text x="40" y="112" text-anchor="middle" font-size="10" fill="#555">(gris = distance)</text>
+    </g>
+  </g>
+
+  <!-- ===== Passe 2 : rendu caméra + test ===== -->
+  <g transform="translate(20,250)">
+    <text x="450" y="0" text-anchor="middle" font-size="15" font-weight="bold" fill="#222">Passe 2 — Rendu caméra + test d'ombre</text>
+    <text x="450" y="18" text-anchor="middle" font-size="12" fill="#666">pour chaque fragment : est-il plus loin que la shadow map ?</text>
+
+    <!-- scène vue caméra -->
+    <!-- sol -->
+    <line x1="40" y1="140" x2="860" y2="140" stroke="#444" stroke-width="2"/>
+    <g stroke="#bbb" stroke-width="1">
+      <line x1="60" y1="140" x2="50" y2="152"/>
+      <line x1="140" y1="140" x2="130" y2="152"/>
+      <line x1="220" y1="140" x2="210" y2="152"/>
+      <line x1="300" y1="140" x2="290" y2="152"/>
+      <line x1="380" y1="140" x2="370" y2="152"/>
+      <line x1="460" y1="140" x2="450" y2="152"/>
+      <line x1="540" y1="140" x2="530" y2="152"/>
+      <line x1="620" y1="140" x2="610" y2="152"/>
+      <line x1="700" y1="140" x2="690" y2="152"/>
+      <line x1="780" y1="140" x2="770" y2="152"/>
+      <line x1="860" y1="140" x2="850" y2="152"/>
+    </g>
+
+    <!-- lumière (même position logique, dessinée au-dessus) -->
+    <circle cx="120" cy="40" r="22" fill="url(#lightGlow)"/>
+    <circle cx="120" cy="40" r="9" fill="#fff4c2" stroke="#e0921a" stroke-width="1.5"/>
+
+    <!-- objet A -->
+    <rect x="280" y="70" width="60" height="70" fill="#6b7280" stroke="#374151" stroke-width="1.5"/>
+    <text x="310" y="155" text-anchor="middle" font-size="10" fill="#374151">A</text>
+    <!-- objet B (derrière A depuis la lumière) -->
+    <rect x="440" y="80" width="70" height="60" fill="#9ca3af" stroke="#4b5563" stroke-width="1.5"/>
+    <text x="475" y="155" text-anchor="middle" font-size="10" fill="#4b5563">B</text>
+
+    <!-- ombre portée de A sur le sol -->
+    <ellipse cx="320" cy="142" rx="55" ry="5" fill="#111" fill-opacity="0.55"/>
+    <!-- ombre portée de A sur B (B est derrière A) -->
+    <path d="M 440 90 L 440 140 L 470 140 L 470 90 Z" fill="#111" fill-opacity="0.45"/>
+    <text x="455" y="120" text-anchor="middle" font-size="9" fill="#fff" font-style="italic">ombre sur B</text>
+
+    <!-- rayon de la lumière vers B, bloqué par A -->
+    <g stroke="#f5a623" stroke-width="1.4" stroke-dasharray="4 3">
+      <line x1="129" y1="46" x2="280" y2="78"/>
+      <line x1="129" y1="46" x2="440" y2="92"/>
+    </g>
+    <!-- point de blocage sur A -->
+    <circle cx="280" cy="78" r="3" fill="#c0392b"/>
+
+    <!-- caméra -->
+    <g transform="translate(760,90)">
+      <rect x="-18" y="-12" width="30" height="20" rx="3" fill="#2c6fb0" stroke="#1c4a80" stroke-width="1.5"/>
+      <polygon points="12,-8 22,-2 12,6" fill="#2c6fb0" stroke="#1c4a80" stroke-width="1.5"/>
+      <text x="0" y="28" text-anchor="middle" font-size="11" fill="#2c6fb0">caméra</text>
+    </g>
+    <!-- frustum caméra -->
+    <g stroke="#2c6fb0" stroke-width="1" stroke-dasharray="3 3" fill="none">
+      <line x1="760" y1="90" x2="540" y2="60"/>
+      <line x1="760" y1="90" x2="540" y2="135"/>
+    </g>
+
+    <!-- étiquettes du test -->
+    <g transform="translate(560,30)">
+      <rect x="0" y="0" width="280" height="58" rx="5" fill="#eef4fb" stroke="#2c6fb0" stroke-width="1"/>
+      <text x="140" y="18" text-anchor="middle" font-size="11" font-weight="bold" fill="#1c4a80">Test par fragment</text>
+      <text x="10" y="36" font-size="10" fill="#222">si  depth(frag) &gt; shadowMap ⇒ ombre</text>
+      <text x="10" y="50" font-size="10" fill="#222">sinon  ⇒ éclairé</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" font-family="system-ui, sans-serif">
+  <!-- Background -->
+  <rect width="600" height="420" fill="#0d0d1a"/>
+
+  <!-- Title -->
+  <text x="300" y="30" text-anchor="middle" fill="#e0e0e0" font-size="15" font-weight="bold">Tone Mapping — comment on comprime le HDR vers [0, 1]</text>
+
+  <!-- Plot area -->
+  <rect x="80" y="50" width="440" height="300" fill="#111122" stroke="#2a2a4a" stroke-width="1"/>
+
+  <!-- Grid lines -->
+  <g stroke="#1a1a2e" stroke-width="1">
+    <line x1="80" y1="125" x2="520" y2="125"/>
+    <line x1="80" y1="200" x2="520" y2="200"/>
+    <line x1="80" y1="275" x2="520" y2="275"/>
+    <line x1="190" y1="50" x2="190" y2="350"/>
+    <line x1="300" y1="50" x2="300" y2="350"/>
+    <line x1="410" y1="50" x2="410" y2="350"/>
+  </g>
+
+  <!-- Axes -->
+  <line x1="80" y1="350" x2="520" y2="350" stroke="#6080a0" stroke-width="2"/>
+  <line x1="80" y1="50" x2="80" y2="350" stroke="#6080a0" stroke-width="2"/>
+
+  <!-- Axis labels -->
+  <text x="300" y="380" text-anchor="middle" fill="#8090a0" font-size="12">Couleur HDR (entrée)</text>
+  <text x="40" y="200" text-anchor="middle" fill="#8090a0" font-size="12" transform="rotate(-90 40 200)">Couleur LDR (sortie)</text>
+
+  <!-- Tick labels X -->
+  <text x="80" y="370" text-anchor="middle" fill="#607080" font-size="10">0</text>
+  <text x="190" y="370" text-anchor="middle" fill="#607080" font-size="10">1</text>
+  <text x="300" y="370" text-anchor="middle" fill="#607080" font-size="10">2</text>
+  <text x="410" y="370" text-anchor="middle" fill="#607080" font-size="10">3</text>
+  <text x="520" y="370" text-anchor="middle" fill="#607080" font-size="10">4</text>
+
+  <!-- Tick labels Y -->
+  <text x="72" y="354" text-anchor="end" fill="#607080" font-size="10">0</text>
+  <text x="72" y="279" text-anchor="end" fill="#607080" font-size="10">0.25</text>
+  <text x="72" y="204" text-anchor="end" fill="#607080" font-size="10">0.5</text>
+  <text x="72" y="129" text-anchor="end" fill="#607080" font-size="10">0.75</text>
+  <text x="72" y="54" text-anchor="end" fill="#607080" font-size="10">1.0</text>
+
+  <!-- 1.0 reference line (LDR max) -->
+  <line x1="80" y1="50" x2="520" y2="50" stroke="#404060" stroke-width="1" stroke-dasharray="4,4"/>
+  <text x="525" y="54" fill="#404060" font-size="10">max écran</text>
+
+  <!-- Clamp curve (y = min(x, 1)) -->
+  <!-- x=0→y=0, x=1→y=1, then flat at y=1 -->
+  <path d="M 80 350 L 190 50 L 520 50" fill="none" stroke="#e05050" stroke-width="2.5" stroke-dasharray="6,3"/>
+  <text x="350" y="45" fill="#e05050" font-size="11" font-weight="bold">Clamp (sans tone mapping)</text>
+
+  <!-- Reinhard curve (y = x/(x+1)) -->
+  <!-- x=0→y=0, x=0.5→y=0.333, x=1→y=0.5, x=2→y=0.667, x=3→y=0.75, x=4→y=0.8 -->
+  <!-- Map: x_pixel = 80 + x*110, y_pixel = 350 - y*300 -->
+  <path d="M 80 350
+           Q 135 250 190 200
+           Q 245 167 300 150
+           Q 355 137 410 125
+           Q 465 115 520 110"
+        fill="none" stroke="#50e050" stroke-width="2.5"/>
+  <text x="525" y="113" fill="#50e050" font-size="11" font-weight="bold">Reinhard</text>
+  <text x="525" y="127" fill="#50e050" font-size="9">x / (x+1)</text>
+
+  <!-- ACES curve (approximate) -->
+  <!-- ACES is more S-shaped: stays linear longer near 0, compresses more gradually -->
+  <!-- x=0→y=0, x=0.5→y=0.45, x=1→y=0.8, x=2→y=0.95, x=3→y=0.98, x=4→y=0.99 -->
+  <path d="M 80 350
+           Q 135 220 190 110
+           Q 245 65 300 55
+           Q 355 52 410 51
+           Q 465 50.5 520 50.5"
+        fill="none" stroke="#5080f0" stroke-width="2.5"/>
+  <text x="300" y="100" fill="#5080f0" font-size="11" font-weight="bold">ACES</text>
+  <text x="300" y="115" fill="#5080f0" font-size="9" text-anchor="middle">préserve le contraste au milieu</text>
+
+  <!-- Annotation: the "flat" zone -->
+  <rect x="190" y="150" width="110" height="50" fill="none" stroke="#e0e050" stroke-width="1" stroke-dasharray="3,3" rx="4"/>
+  <text x="245" y="175" text-anchor="middle" fill="#e0e050" font-size="9" font-style="italic">Reinhard comprime</text>
+  <text x="245" y="188" text-anchor="middle" fill="#e0e050" font-size="9" font-style="italic">trop ici → "plat"</text>
+
+  <!-- Legend at bottom -->
+  <g transform="translate(80, 395)">
+    <line x1="0" y1="0" x2="20" y2="0" stroke="#e05050" stroke-width="2.5" stroke-dasharray="6,3"/>
+    <text x="25" y="4" fill="#e0e0e0" font-size="10">Clamp (écrêtage brutal)</text>
+
+    <line x1="160" y1="0" x2="180" y2="0" stroke="#50e050" stroke-width="2.5"/>
+    <text x="185" y="4" fill="#e0e0e0" font-size="10">Reinhard (doux mais plat)</text>
+
+    <line x1="340" y1="0" x2="360" y2="0" stroke="#5080f0" stroke-width="2.5"/>
+    <text x="365" y="4" fill="#e0e0e0" font-size="10">ACES (standard cinéma)</text>
+  </g>
+</svg>

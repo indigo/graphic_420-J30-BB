@@ -1,0 +1,70 @@
+<svg width="940" height="380" viewBox="0 0 940 380" fill="none" xmlns="http://www.w3.org/2000/svg" font-family="Georgia, serif">
+  <defs>
+    <radialGradient id="sunGlow2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff4c2" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#f5a623" stop-opacity="0"/>
+    </radialGradient>
+    <marker id="arrCam" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#2c6fb0"/>
+    </marker>
+  </defs>
+
+  <rect width="940" height="380" fill="#ffffff"/>
+
+  <text x="470" y="22" text-anchor="middle" font-size="15" font-weight="bold" fill="#222">Cascaded Shadow Maps — frustum divisé en cascades</text>
+  <text x="470" y="40" text-anchor="middle" font-size="12" fill="#666">chaque cascade a sa propre shadow map ; résolution élevée près de la caméra, faible au loin</text>
+
+  <!-- caméra à gauche -->
+  <g transform="translate(60,200)">
+    <rect x="-18" y="-12" width="30" height="20" rx="3" fill="#2c6fb0" stroke="#1c4a80" stroke-width="1.5"/>
+    <polygon points="12,-8 22,-2 12,6" fill="#2c6fb0" stroke="#1c4a80" stroke-width="1.5"/>
+    <text x="0" y="32" text-anchor="middle" font-size="12" fill="#2c6fb0">caméra</text>
+  </g>
+
+  <!-- frustum divisé en 4 cascades -->
+  <!-- cascade 1 (proche, étroit, haute résolution) -->
+  <path d="M 80 200 L 180 130 L 180 270 Z" fill="#2c6fb0" fill-opacity="0.18" stroke="#2c6fb0" stroke-width="1.4"/>
+  <text x="130" y="205" text-anchor="middle" font-size="11" fill="#1c4a80" font-weight="bold">C1</text>
+  <text x="130" y="220" text-anchor="middle" font-size="9" fill="#1c4a80">2048²</text>
+
+  <!-- cascade 2 -->
+  <path d="M 180 130 L 180 270 L 340 90 L 340 310 Z" fill="#2c8a4a" fill-opacity="0.16" stroke="#2c8a4a" stroke-width="1.4"/>
+  <text x="260" y="205" text-anchor="middle" font-size="11" fill="#1c5a2a" font-weight="bold">C2</text>
+  <text x="260" y="220" text-anchor="middle" font-size="9" fill="#1c5a2a">1024²</text>
+
+  <!-- cascade 3 -->
+  <path d="M 340 90 L 340 310 L 560 50 L 560 350 Z" fill="#e0921a" fill-opacity="0.16" stroke="#e0921a" stroke-width="1.4"/>
+  <text x="450" y="205" text-anchor="middle" font-size="11" fill="#7a5300" font-weight="bold">C3</text>
+  <text x="450" y="220" text-anchor="middle" font-size="9" fill="#7a5300">512²</text>
+
+  <!-- cascade 4 (lointaine, large, basse résolution) -->
+  <path d="M 560 50 L 560 350 L 880 10 L 880 390 Z" fill="#c0392b" fill-opacity="0.12" stroke="#c0392b" stroke-width="1.4"/>
+  <text x="720" y="205" text-anchor="middle" font-size="11" fill="#8a2820" font-weight="bold">C4</text>
+  <text x="720" y="220" text-anchor="middle" font-size="9" fill="#8a2820">256²</text>
+
+  <!-- soleil (lumière directionnelle, rayons parallèles) -->
+  <g transform="translate(870,60)">
+    <circle cx="0" cy="0" r="22" fill="url(#sunGlow2)"/>
+    <circle cx="0" cy="0" r="10" fill="#fff4c2" stroke="#e0921a" stroke-width="1.5"/>
+    <text x="0" y="-32" text-anchor="middle" font-size="12" fill="#7a5300">soleil</text>
+  </g>
+  <!-- rayons parallèles -->
+  <g stroke="#f5a623" stroke-width="1.4" stroke-dasharray="4 3">
+    <line x1="860" y1="55" x2="200" y2="160"/>
+    <line x1="860" y1="70" x2="200" y2="240"/>
+  </g>
+
+  <!-- objets à différentes distances -->
+  <rect x="120" y="170" width="20" height="30" fill="#374151"/>
+  <rect x="280" y="170" width="30" height="40" fill="#374151"/>
+  <rect x="460" y="170" width="40" height="50" fill="#374151"/>
+  <rect x="700" y="170" width="55" height="60" fill="#374151"/>
+
+  <!-- légende résolution -->
+  <g transform="translate(60,330)">
+    <text x="0" y="0" font-size="11" fill="#222" font-weight="bold">Près de la caméra :</text>
+    <text x="0" y="16" font-size="11" fill="#555">peu de surface à couvrir ⇒ shadow map haute résolution ⇒ ombres nettes</text>
+    <text x="430" y="0" font-size="11" fill="#222" font-weight="bold">Au loin :</text>
+    <text x="430" y="16" font-size="11" fill="#555">beaucoup de surface ⇒ basse résolution suffit (l'œil ne voit pas le détail)</text>
+  </g>
+</svg>

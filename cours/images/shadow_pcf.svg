@@ -1,0 +1,88 @@
+<svg width="920" height="360" viewBox="0 0 920 360" fill="none" xmlns="http://www.w3.org/2000/svg" font-family="Georgia, serif">
+  <defs>
+    <radialGradient id="lightGlow4" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff4c2" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#f5a623" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="920" height="360" fill="#ffffff"/>
+
+  <!-- ===== Ombre dure (1 échantillon) ===== -->
+  <g transform="translate(40,40)">
+    <text x="200" y="0" text-anchor="middle" font-size="15" font-weight="bold" fill="#222">Ombre dure — 1 échantillon</text>
+    <text x="200" y="18" text-anchor="middle" font-size="12" fill="#666">test binaire : éclairé OU ombré</text>
+
+    <!-- sol -->
+    <line x1="20" y1="210" x2="380" y2="210" stroke="#444" stroke-width="2"/>
+    <!-- cube -->
+    <rect x="170" y="120" width="60" height="90" fill="#6b7280" stroke="#374151" stroke-width="1.8"/>
+    <!-- lumière -->
+    <circle cx="60" cy="50" r="20" fill="url(#lightGlow4)"/>
+    <circle cx="60" cy="50" r="8" fill="#fff4c2" stroke="#e0921a" stroke-width="1.4"/>
+    <!-- ombre nette -->
+    <rect x="210" y="210" width="120" height="6" fill="#111" fill-opacity="0.6"/>
+    <text x="270" y="240" text-anchor="middle" font-size="11" fill="#c0392b">bord net (1 pixel)</text>
+  </g>
+
+  <!-- ===== PCF 3x3 ===== -->
+  <g transform="translate(500,40)">
+    <text x="200" y="0" text-anchor="middle" font-size="15" font-weight="bold" fill="#222">PCF 3×3 — 9 échantillons</text>
+    <text x="200" y="18" text-anchor="middle" font-size="12" fill="#666">moyenne des 9 tests voisins</text>
+
+    <line x1="20" y1="210" x2="380" y2="210" stroke="#444" stroke-width="2"/>
+    <rect x="170" y="120" width="60" height="90" fill="#6b7280" stroke="#374151" stroke-width="1.8"/>
+    <circle cx="60" cy="50" r="20" fill="url(#lightGlow4)"/>
+    <circle cx="60" cy="50" r="8" fill="#fff4c2" stroke="#e0921a" stroke-width="1.4"/>
+    <!-- ombre avec bord adouci (dégradé) -->
+    <rect x="210" y="210" width="120" height="6" fill="#111" fill-opacity="0.6"/>
+    <rect x="200" y="210" width="10" height="6" fill="#111" fill-opacity="0.3"/>
+    <rect x="330" y="210" width="10" height="6" fill="#111" fill-opacity="0.3"/>
+    <rect x="195" y="210" width="5" height="6" fill="#111" fill-opacity="0.15"/>
+    <rect x="340" y="210" width="5" height="6" fill="#111" fill-opacity="0.15"/>
+    <text x="270" y="240" text-anchor="middle" font-size="11" fill="#2c8a4a">bord adouci sur ~2-3 px</text>
+  </g>
+
+  <!-- ===== Grille d'échantillonnage PCF ===== -->
+  <g transform="translate(150,265)">
+    <text x="300" y="0" text-anchor="middle" font-size="13" font-weight="bold" fill="#222">Échantillonnage PCF autour du fragment</text>
+    <!-- grille 5x5 -->
+    <g transform="translate(60,20)">
+      <rect x="0" y="0" width="120" height="120" fill="none" stroke="#888" stroke-width="1"/>
+      <!-- lignes -->
+      <g stroke="#ccc" stroke-width="0.8">
+        <line x1="24" y1="0" x2="24" y2="120"/>
+        <line x1="48" y1="0" x2="48" y2="120"/>
+        <line x1="72" y1="0" x2="72" y2="120"/>
+        <line x1="96" y1="0" x2="96" y2="120"/>
+        <line x1="0" y1="24" x2="120" y2="24"/>
+        <line x1="0" y1="48" x2="120" y2="48"/>
+        <line x1="0" y1="72" x2="120" y2="72"/>
+        <line x1="0" y1="96" x2="120" y2="96"/>
+      </g>
+      <!-- centre (fragment) -->
+      <rect x="48" y="48" width="24" height="24" fill="#2c6fb0" fill-opacity="0.5" stroke="#1c4a80" stroke-width="1.2"/>
+      <!-- échantillons 3x3 autour -->
+      <g fill="#f5a623" fill-opacity="0.55" stroke="#7a5300" stroke-width="0.8">
+        <rect x="24" y="24" width="24" height="24"/>
+        <rect x="48" y="24" width="24" height="24"/>
+        <rect x="72" y="24" width="24" height="24"/>
+        <rect x="24" y="48" width="24" height="24"/>
+        <rect x="72" y="48" width="24" height="24"/>
+        <rect x="24" y="72" width="24" height="24"/>
+        <rect x="48" y="72" width="24" height="24"/>
+        <rect x="72" y="72" width="24" height="24"/>
+      </g>
+      <text x="60" y="140" text-anchor="middle" font-size="10" fill="#555">fragment central + 8 voisins = 9 tests moyennés</text>
+    </g>
+    <!-- formule -->
+    <g transform="translate(240,30)">
+      <text x="0" y="0" font-size="12" fill="#222" font-weight="bold">shadow = moyenne des</text>
+      <text x="0" y="18" font-size="12" fill="#222" font-weight="bold">tests depth(frag) &gt; SM</text>
+      <text x="0" y="44" font-size="11" fill="#555">résultat ∈ [0, 1] (pas binaire)</text>
+      <text x="0" y="62" font-size="11" fill="#555">0 = totalement éclairé</text>
+      <text x="0" y="78" font-size="11" fill="#555">1 = totalement ombré</text>
+      <text x="0" y="100" font-size="11" fill="#c0392b">coût : N² échantillons par frag</text>
+    </g>
+  </g>
+</svg>

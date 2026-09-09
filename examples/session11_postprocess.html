@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 11 — Post-Processing en Three.js</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Georgia, serif;
+        background: #1a1a1a;
+        color: #eee;
+      }
+      #info {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        padding: 10px 14px;
+        background: rgba(0, 0, 0, 0.55);
+        border-radius: 6px;
+        font-size: 13px;
+        line-height: 1.5;
+        pointer-events: none;
+        max-width: 380px;
+      }
+      #info b { color: #f5a623; }
+      #info .hint { color: #aaa; font-size: 11px; margin-top: 6px; }
+      #fps {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        padding: 4px 10px;
+        background: rgba(0, 0, 0, 0.55);
+        border-radius: 4px;
+        font-size: 12px;
+        font-family: monospace;
+      }
+      .lil-gui {
+        --background-color: #2a2a2a;
+        --text-color: #eee;
+        --title-background-color: #1c1c1c;
+        --widget-color: #444;
+        --hover-color: #555;
+        --focus-color: #666;
+        --number-color: #f5a623;
+        --string-color: #8ec6ff;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.185.1/build/three.module.js",
+          "jsm/": "https://unpkg.com/three@0.185.1/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="info">
+      <b>Session 11 — Post-Processing</b><br />
+      OrbitControls : glisser pour tourner, molette pour zoomer.<br />
+      Activez/désactivez les effets pour voir leur impact.<br />
+      Ajustez le <b>bloom</b> (seuil + intensité) pour voir le halo lumineux.<br />
+      Comparez <b>Reinhard</b> vs <b>ACES</b> pour le tone mapping.<br />
+      Activez le <b>Vieux Téléviseur</b> pour l'effet CRT (scanlines + courbure + scintillement).
+      <div class="hint">Astuce : désactivez tout, puis réactivez un par un pour isoler chaque effet. Le vieux TV regroupe plusieurs effets dans un seul shader.</div>
+    </div>
+    <div id="fps">— FPS</div>
+    <script type="module" src="session11_postprocess.js"></script>
+  </body>
+</html>

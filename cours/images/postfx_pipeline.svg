@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#6080a0"/>
+    </marker>
+    <linearGradient id="rt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a2a4a"/>
+      <stop offset="100%" stop-color="#0d1a2a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Scene render -->
+  <rect x="20" y="80" width="120" height="100" rx="8" fill="url(#rt)" stroke="#40a0ff" stroke-width="2"/>
+  <text x="80" y="70" text-anchor="middle" fill="#60c0ff" font-size="13" font-weight="bold">Scène</text>
+  <text x="80" y="200" text-anchor="middle" fill="#8090a0" font-size="11">RenderPass</text>
+  <text x="80" y="215" text-anchor="middle" fill="#607080" font-size="10">(render target)</text>
+
+  <!-- Arrow -->
+  <line x1="145" y1="130" x2="195" y2="130" stroke="#6080a0" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- Effect 1 -->
+  <rect x="200" y="80" width="120" height="100" rx="8" fill="url(#rt)" stroke="#50e050" stroke-width="2"/>
+  <text x="260" y="70" text-anchor="middle" fill="#50e050" font-size="13" font-weight="bold">Bloom</text>
+  <text x="260" y="200" text-anchor="middle" fill="#8090a0" font-size="11">UnrealBloomPass</text>
+  <text x="260" y="215" text-anchor="middle" fill="#607080" font-size="10">(RT A → RT B)</text>
+
+  <!-- Arrow -->
+  <line x1="325" y1="130" x2="375" y2="130" stroke="#6080a0" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- Effect 2 -->
+  <rect x="380" y="80" width="120" height="100" rx="8" fill="url(#rt)" stroke="#e0e050" stroke-width="2"/>
+  <text x="440" y="70" text-anchor="middle" fill="#e0e050" font-size="13" font-weight="bold">Vignette</text>
+  <text x="440" y="200" text-anchor="middle" fill="#8090a0" font-size="11">ShaderPass</text>
+  <text x="440" y="215" text-anchor="middle" fill="#607080" font-size="10">(RT B → RT A)</text>
+
+  <!-- Arrow -->
+  <line x1="505" y1="130" x2="555" y2="130" stroke="#6080a0" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- Tone mapping -->
+  <rect x="560" y="80" width="120" height="100" rx="8" fill="url(#rt)" stroke="#e05050" stroke-width="2"/>
+  <text x="620" y="70" text-anchor="middle" fill="#e05050" font-size="13" font-weight="bold">Tone Map</text>
+  <text x="620" y="200" text-anchor="middle" fill="#8090a0" font-size="11">OutputPass</text>
+  <text x="620" y="215" text-anchor="middle" fill="#607080" font-size="10">(HDR → LDR)</text>
+
+  <!-- Arrow to screen -->
+  <line x1="685" y1="130" x2="735" y2="130" stroke="#6080a0" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- Screen -->
+  <rect x="740" y="100" width="40" height="30" rx="4" fill="#101020" stroke="#60d0ff" stroke-width="2"/>
+  <text x="760" y="150" text-anchor="middle" fill="#60d0ff" font-size="11">Écran</text>
+
+  <!-- Ping-pong label -->
+  <text x="400" y="260" text-anchor="middle" fill="#6080a0" font-size="11" font-style="italic">Ping-pong : les effets alternent entre deux render targets</text>
+</svg>
