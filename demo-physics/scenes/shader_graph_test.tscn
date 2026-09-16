@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://cq5vpgrb1m5wx"]
+
+[ext_resource type="Material" uid="uid://cr1ydi1knvp5y" path="res://shaders/test_material.tres" id="1_1uhit"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_4yv0l"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8smjo"]
+ground_energy_multiplier = 0.0
+energy_multiplier = 0.92
+
+[sub_resource type="Sky" id="Sky_4pb7j"]
+sky_material = SubResource("ProceduralSkyMaterial_8smjo")
+
+[sub_resource type="Environment" id="Environment_gjxax"]
+background_mode = 2
+sky = SubResource("Sky_4pb7j")
+
+[node name="ShaderGraphTest" type="Node3D" unique_id=2040589825]
+
+[node name="TestSphere" type="MeshInstance3D" parent="." unique_id=250986190]
+material_override = ExtResource("1_1uhit")
+mesh = SubResource("SphereMesh_4yv0l")
+surface_material_override/0 = ExtResource("1_1uhit")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=349502234]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+current = true
+fov = 60.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1783714862]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=938494175]
+environment = SubResource("Environment_gjxax")

@@ -1,0 +1,74 @@
+<svg width="800" height="380" viewBox="0 0 800 380" fill="none" xmlns="http://www.w3.org/2000/svg" font-family="Georgia, serif">
+  <rect width="800" height="380" fill="#ffffff"/>
+
+  <text x="400" y="24" text-anchor="middle" font-size="15" font-weight="bold" fill="#222">Octree — subdiviser l'espace pour culer par groupes</text>
+  <text x="400" y="42" text-anchor="middle" font-size="12" fill="#666">un test rejette un sous-espace entier au lieu de tester chaque objet</text>
+
+  <!-- Root cube -->
+  <rect x="100" y="70" width="260" height="260" fill="none" stroke="#2c6fb0" stroke-width="2.5"/>
+  <text x="230" y="65" text-anchor="middle" font-size="11" fill="#2c6fb0" font-weight="bold">Racine (root)</text>
+
+  <!-- 4 quadrants visible (top-down view, showing 4 of 8) -->
+  <line x1="230" y1="70" x2="230" y2="330" stroke="#2c6fb0" stroke-width="1.5" opacity="0.6"/>
+  <line x1="100" y1="200" x2="360" y2="200" stroke="#2c6fb0" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- Subdivide top-left -->
+  <rect x="100" y="70" width="130" height="130" fill="none" stroke="#5a8acc" stroke-width="1.5"/>
+  <line x1="165" y1="70" x2="165" y2="200" stroke="#5a8acc" stroke-width="1" opacity="0.5"/>
+  <line x1="100" y1="135" x2="230" y2="135" stroke="#5a8acc" stroke-width="1" opacity="0.5"/>
+
+  <!-- Subdivide top-right -->
+  <rect x="230" y="70" width="130" height="130" fill="none" stroke="#5a8acc" stroke-width="1.5"/>
+  <line x1="295" y1="70" x2="295" y2="200" stroke="#5a8acc" stroke-width="1" opacity="0.5"/>
+  <line x1="230" y1="135" x2="360" y2="135" stroke="#5a8acc" stroke-width="1" opacity="0.5"/>
+
+  <!-- Subdivide bottom-left -->
+  <rect x="100" y="200" width="130" height="130" fill="none" stroke="#5a8acc" stroke-width="1.5"/>
+  <line x1="165" y1="200" x2="165" y2="330" stroke="#5a8acc" stroke-width="1" opacity="0.5"/>
+  <line x1="100" y1="265" x2="230" y2="265" stroke="#5a8acc" stroke-width="1" opacity="0.5"/>
+
+  <!-- Subdivide bottom-right -->
+  <rect x="230" y="200" width="130" height="130" fill="none" stroke="#5a8acc" stroke-width="1.5"/>
+
+  <!-- Objects (dots) -->
+  <!-- Inside frustum (green) -->
+  <circle cx="140" cy="100" r="6" fill="#4a9a4a"/>
+  <circle cx="190" cy="115" r="6" fill="#4a9a4a"/>
+  <circle cx="260" cy="95" r="6" fill="#4a9a4a"/>
+  <circle cx="310" cy="170" r="6" fill="#4a9a4a"/>
+  <circle cx="130" cy="240" r="6" fill="#4a9a4a"/>
+  <circle cx="200" cy="290" r="6" fill="#4a9a4a"/>
+
+  <!-- Outside frustum (red) -->
+  <circle cx="320" cy="250" r="6" fill="#cc4444"/>
+  <circle cx="340" cy="300" r="6" fill="#cc4444"/>
+  <circle cx="250" cy="310" r="6" fill="#cc4444"/>
+
+  <!-- Frustum overlay (semi-transparent triangle) -->
+  <path d="M 110,90 L 350,150 L 350,280 L 120,260 Z" fill="#2c6fb0" fill-opacity="0.05" stroke="#2c6fb0" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <!-- Right side: explanation -->
+  <g transform="translate(420,80)">
+    <text x="0" y="0" font-size="13" font-weight="bold" fill="#222">Comment ça marche</text>
+
+    <text x="0" y="25" font-size="11" fill="#444">1. On divise l'espace en 8 cellules (octree)</text>
+    <text x="10" y="42" font-size="11" fill="#444">ou 4 (quadtree en 2D)</text>
+
+    <text x="0" y="68" font-size="11" fill="#444">2. Chaque objet est placé dans la cellule</text>
+    <text x="10" y="85" font-size="11" fill="#444">qui le contient</text>
+
+    <text x="0" y="111" font-size="11" fill="#444">3. Si une cellule est entièrement hors du</text>
+    <text x="10" y="128" font-size="11" fill="#444">frustum → on skip toute la sous-branche</text>
+
+    <text x="0" y="154" font-size="11" fill="#444">4. On ne teste que les cellules qui</text>
+    <text x="10" y="171" font-size="11" fill="#444">intersectent le frustum</text>
+
+    <!-- Cost comparison -->
+    <rect x="0" y="195" width="340" height="70" rx="6" fill="#f5f5f5" stroke="#ddd"/>
+    <text x="10" y="215" font-size="11" font-weight="bold" fill="#444">Coût du culling :</text>
+    <text x="10" y="235" font-size="11" fill="#cc4444">Sans structure : O(N) — tester les 10 000 objets</text>
+    <text x="10" y="255" font-size="11" fill="#4a9a4a">Avec octree : O(log N) — ~14 tests pour 10 000</text>
+  </g>
+
+  <text x="400" y="365" text-anchor="middle" font-size="11" fill="#666">Même structure qu'en physique (broadphase collision) — mais la question est "est-ce visible ?" au lieu de "est-ce en collision ?"</text>
+</svg>

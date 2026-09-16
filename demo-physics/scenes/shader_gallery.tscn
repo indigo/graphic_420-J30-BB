@@ -1,0 +1,254 @@
+[gd_scene format=3 uid="uid://crxksqtg6lgdi"]
+
+[ext_resource type="Script" uid="uid://d3kood637q3uf" path="res://scripts/gallery_controller.gd" id="1_script"]
+[ext_resource type="Shader" uid="uid://cjiitd5fe8pox" path="res://shaders/gallery/normal_rainbow.gdshader" id="2_norm"]
+[ext_resource type="Shader" uid="uid://xx27u8sy07vq" path="res://shaders/gallery/uv_inspector.gdshader" id="3_uv"]
+[ext_resource type="Shader" uid="uid://duyu8u5icave6" path="res://shaders/gallery/world_position.gdshader" id="4_wpos"]
+[ext_resource type="Shader" uid="uid://b2oew4oc2xlnc" path="res://shaders/gallery/fresnel_rim.gdshader" id="5_fres"]
+[ext_resource type="Shader" uid="uid://cktm61bw3nomm" path="res://shaders/gallery/pulse_glow.gdshader" id="6_pulse"]
+[ext_resource type="Shader" uid="uid://ign7xbjym7ky" path="res://shaders/gallery/scroll_stripes.gdshader" id="7_scroll"]
+[ext_resource type="Shader" uid="uid://c7ukcqhvy5c0h" path="res://shaders/gallery/dissolve_noise.gdshader" id="8_diss"]
+[ext_resource type="Shader" uid="uid://dg6m8si46025f" path="res://shaders/gallery/toon_bands.gdshader" id="9_toon"]
+[ext_resource type="Shader" uid="uid://dj3vbiemy48r4" path="res://shaders/gallery/hologram.gdshader" id="10_holo"]
+[ext_resource type="Shader" uid="uid://bxlns1vv240cs" path="res://shaders/gallery/explode_mesh.gdshader" id="11_expl"]
+[ext_resource type="Shader" uid="uid://wlm57w7j12l0" path="res://shaders/gallery/flag_wind.gdshader" id="12_flag"]
+
+[sub_resource type="Environment" id="Env_gallery"]
+background_mode = 1
+background_color = Color(0.02, 0.022, 0.03, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.5, 0.55, 0.65, 1)
+ambient_light_energy = 0.7
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_floor"]
+size = Vector2(40, 40)
+
+[sub_resource type="StandardMaterial3D" id="StdMat_floor"]
+albedo_color = Color(0.12, 0.13, 0.15, 1)
+roughness = 0.95
+
+[sub_resource type="ShaderMaterial" id="Mat_normals"]
+render_priority = 0
+shader = ExtResource("2_norm")
+
+[sub_resource type="SphereMesh" id="SphereMesh_demo"]
+radial_segments = 48
+rings = 24
+
+[sub_resource type="ShaderMaterial" id="Mat_uv"]
+render_priority = 0
+shader = ExtResource("3_uv")
+
+[sub_resource type="ShaderMaterial" id="Mat_wpos"]
+render_priority = 0
+shader = ExtResource("4_wpos")
+
+[sub_resource type="ShaderMaterial" id="Mat_fresnel"]
+render_priority = 0
+shader = ExtResource("5_fres")
+shader_parameter/rim_color = Color(0.59720135, 0.6715182, 0.8121104, 1)
+shader_parameter/power = 5.32300024632273
+
+[sub_resource type="ShaderMaterial" id="Mat_pulse"]
+render_priority = 0
+shader = ExtResource("6_pulse")
+shader_parameter/glow_color = Color(1, 0.35, 0.1, 1)
+shader_parameter/speed = 3.6670001741825
+
+[sub_resource type="ShaderMaterial" id="Mat_scroll"]
+render_priority = 0
+shader = ExtResource("7_scroll")
+shader_parameter/stripe_count = 9.00000038
+shader_parameter/scroll_speed = Vector2(0.1, 0)
+
+[sub_resource type="ShaderMaterial" id="Mat_dissolve"]
+render_priority = 0
+shader = ExtResource("8_diss")
+shader_parameter/dissolve_amount = 0.394000018715
+shader_parameter/edge_width = 0.11300000466898
+shader_parameter/noise_scale = 6.762000273695
+
+[sub_resource type="ShaderMaterial" id="Mat_toon"]
+render_priority = 0
+shader = ExtResource("9_toon")
+shader_parameter/base_color = Color(0.85, 0.3, 0.2, 1)
+shader_parameter/steps = 3.0
+
+[sub_resource type="ShaderMaterial" id="Mat_holo"]
+render_priority = 0
+shader = ExtResource("10_holo")
+shader_parameter/holo_color = Color(0.3, 0.75, 1, 1)
+shader_parameter/scan_count = 22.0
+shader_parameter/scan_speed = 1.5
+shader_parameter/fresnel_power = 2.5
+
+[sub_resource type="ShaderMaterial" id="Mat_explode"]
+render_priority = 0
+shader = ExtResource("11_expl")
+shader_parameter/explode_amount = 0.0
+
+[sub_resource type="ShaderMaterial" id="Mat_flag"]
+render_priority = 0
+shader = ExtResource("12_flag")
+shader_parameter/color_a = Color(0.85, 0.25, 0.2, 1)
+shader_parameter/color_b = Color(0.95, 0.85, 0.3, 1)
+shader_parameter/wave_height = 0.16
+shader_parameter/wave_speed = 5.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_flag"]
+size = Vector2(2.2, 1.4)
+subdivide_width = 13
+subdivide_depth = 2
+
+[node name="ShaderGallery" type="Node3D" unique_id=404058015]
+script = ExtResource("1_script")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=364527420]
+environment = SubResource("Env_gallery")
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=596474253]
+transform = Transform3D(0.8483086, 0.2239595, -0.47980693, 0.46508986, 0.11799431, 0.87736475, 0.25310868, -0.9674293, -0.004065752, 0, 8, 6)
+light_color = Color(1, 0.9816667, 0.95, 1)
+light_energy = 1.3
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1056398676]
+transform = Transform3D(1, 0, 0, 0, 0.6584352, 0.75263745, 0, -0.75263745, 0.6584352, 0, 4.995401, 4.808671)
+current = true
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=1353333309]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.14342034, 0)
+mesh = SubResource("PlaneMesh_floor")
+surface_material_override/0 = SubResource("StdMat_floor")
+
+[node name="S_Normals" type="MeshInstance3D" parent="." unique_id=476088960]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.75, 1.6)
+material_override = SubResource("Mat_normals")
+mesh = SubResource("SphereMesh_demo")
+
+[node name="S_UV" type="MeshInstance3D" parent="." unique_id=552075901]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6, 0.75, 1.6)
+material_override = SubResource("Mat_uv")
+mesh = SubResource("SphereMesh_demo")
+
+[node name="S_WorldPos" type="MeshInstance3D" parent="." unique_id=1098671603]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.75, 1.6)
+material_override = SubResource("Mat_wpos")
+mesh = SubResource("SphereMesh_demo")
+
+[node name="S_Fresnel" type="MeshInstance3D" parent="." unique_id=1198192343]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.75, 1.6)
+material_override = SubResource("Mat_fresnel")
+mesh = SubResource("SphereMesh_demo")
+
+[node name="S_Pulse" type="MeshInstance3D" parent="." unique_id=432544702]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 0.75, 1.6)
+material_override = SubResource("Mat_pulse")
+mesh = SubResource("SphereMesh_demo")
+
+[node name="S_Scroll" type="MeshInstance3D" parent="." unique_id=1420847482]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.75, 1.6)
+material_override = SubResource("Mat_scroll")
+mesh = SubResource("SphereMesh_demo")
+
+[node name="S_Dissolve" type="MeshInstance3D" parent="." unique_id=782607653]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8, 0.75, -1.4)
+material_override = SubResource("Mat_dissolve")
+mesh = SubResource("SphereMesh_demo")
+
+[node name="S_Toon" type="MeshInstance3D" parent="." unique_id=1240614823]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0.75, -1.4)
+material_override = SubResource("Mat_toon")
+mesh = SubResource("SphereMesh_demo")
+
+[node name="S_Holo" type="MeshInstance3D" parent="." unique_id=733173929]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -1.4)
+material_override = SubResource("Mat_holo")
+mesh = SubResource("SphereMesh_demo")
+
+[node name="S_Explode" type="MeshInstance3D" parent="." unique_id=1072820741]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4, 0.75, -1.4)
+material_override = SubResource("Mat_explode")
+mesh = SubResource("SphereMesh_demo")
+
+[node name="S_Flag" type="MeshInstance3D" parent="." unique_id=607754190]
+transform = Transform3D(1, 0, 0, 0, -3.6199901e-06, -1, 0, 1, -3.6199901e-06, 4.8, 1.1, -1.4)
+material_override = SubResource("Mat_flag")
+mesh = SubResource("PlaneMesh_flag")
+
+[node name="L_Normals" type="Label3D" parent="." unique_id=1997607276]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.02, 2.2)
+billboard = 1
+text = "NORMALS"
+font_size = 72
+outline_size = 14
+
+[node name="L_UV" type="Label3D" parent="." unique_id=1860141046]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6, 0.02, 2.2)
+billboard = 1
+text = "UV"
+font_size = 72
+outline_size = 14
+
+[node name="L_WorldPos" type="Label3D" parent="." unique_id=1428555776]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.02, 2.2)
+billboard = 1
+text = "WORLD POS"
+font_size = 72
+outline_size = 14
+
+[node name="L_Fresnel" type="Label3D" parent="." unique_id=1442642910]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.02, 2.2)
+billboard = 1
+text = "FRESNEL"
+font_size = 72
+outline_size = 14
+
+[node name="L_Pulse" type="Label3D" parent="." unique_id=1982325786]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 0.02, 2.2)
+billboard = 1
+text = "PULSE"
+font_size = 72
+outline_size = 14
+
+[node name="L_Scroll" type="Label3D" parent="." unique_id=1382586567]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.02, 2.2)
+billboard = 1
+text = "SCROLL"
+font_size = 72
+outline_size = 14
+
+[node name="L_Dissolve" type="Label3D" parent="." unique_id=1141224399]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8, 0.02, -0.8)
+billboard = 1
+text = "DISSOLVE"
+font_size = 72
+outline_size = 14
+
+[node name="L_Toon" type="Label3D" parent="." unique_id=862035906]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0.02, -0.8)
+billboard = 1
+text = "TOON"
+font_size = 72
+outline_size = 14
+
+[node name="L_Holo" type="Label3D" parent="." unique_id=618979733]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, -0.8)
+billboard = 1
+text = "HOLOGRAM"
+font_size = 72
+outline_size = 14
+
+[node name="L_Explode" type="Label3D" parent="." unique_id=967166815]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4, 0.02, -0.8)
+billboard = 1
+text = "EXPLODE"
+font_size = 72
+outline_size = 14
+
+[node name="L_Flag" type="Label3D" parent="." unique_id=1475729243]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8, 0.02, -0.8)
+billboard = 1
+text = "FLAG"
+font_size = 72
+outline_size = 14
