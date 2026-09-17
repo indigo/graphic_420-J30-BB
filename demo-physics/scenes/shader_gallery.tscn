@@ -46,8 +46,8 @@ shader = ExtResource("4_wpos")
 [sub_resource type="ShaderMaterial" id="Mat_fresnel"]
 render_priority = 0
 shader = ExtResource("5_fres")
-shader_parameter/rim_color = Color(0.59720135, 0.6715182, 0.8121104, 1)
-shader_parameter/power = 5.32300024632273
+shader_parameter/rim_color = Color(0.92095196, 0.44812053, 0.9496854, 1)
+shader_parameter/power = 7.007000326312729
 
 [sub_resource type="ShaderMaterial" id="Mat_pulse"]
 render_priority = 0
