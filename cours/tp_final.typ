@@ -21,7 +21,7 @@
 
 #important-box(title: "Dates")[
   - *Démarrage* : le *prochain cours* est réservé pour choisir votre sujet et commencer. Venez avec une idée (ou deux) et votre environnement de travail déjà installé.
-  - *Remise* : *vendredi 25 septembre 2026*, avant la fin de la journée — vidéo, projet et résumé écrit.
+  - *Remise* : *Mercredi 30 septembre 2026*, avant la fin de la journée — vidéo, projet et résumé écrit.
 ]
 
 #heading(level: 2)[Structure imposée de la vidéo]
@@ -52,7 +52,7 @@
 
 #definition-box(title: "Trois éléments")[
   - *La vidéo* : lien non répertorié (YouTube) ou fichier (Drive, Teams). 10 min, voix française.
-  - *Le projet* : archive `.zip` du dossier (scène, code, assets). Sert de vérification au besoin.
+  - *Le projet* : (optionel) archive `.zip` du dossier (scène, code, assets). Sert de vérification au besoin.
   - *Un résumé écrit de 5 lignes* : le sujet choisi, les outils, ce que les preuves montrent. Cela me permet d'aller droit au but en corrigeant.
 ]
 
